@@ -18,9 +18,4 @@ public interface FriendshipRepository extends JpaRepository <Friendship, Long> {
 
     Optional<Friendship> findByUserIdAndFriendId(Long user_id, Long friend_id);
 
-/*    @Modifying
-    @Transactional
-    @Query("DELETE FROM Friendship f WHERE f.userId = :userId AND f.friendId = :friendId")
-    void deleteByUserIdAndFriendId(@Param("userId") Long userId, @Param("friendId") Long friendId);*/
-
 }

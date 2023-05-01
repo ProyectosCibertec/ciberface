@@ -1,29 +1,28 @@
 package pe.edu.cibertec.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
-@Getter
-@Setter
+@Table(name = "user")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private long user_id;
+    @Column(name = "user_id")
+    private long userId;
 
     @Column(name = "first_name", length = 50)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name", length = 50)
-    private String last_name;
+    private String lastName;
 
     @Column(name = "user_name", length = 50)
-    private String user_name;
+    private String userName;
 
     @Column(name = "email", length = 100)
     private String email;
@@ -35,10 +34,5 @@ public class User {
     private String biography;
 
     @Column(name = "photo_url", length = 250)
-    private String photo_url;
-
-    @Column(name="create_date",  nullable = false)
-    @Temporal(value=TemporalType.TIMESTAMP)
-    private Date create_date;
-
+    private String photoUrl;
 }
