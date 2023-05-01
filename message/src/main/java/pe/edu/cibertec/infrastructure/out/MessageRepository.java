@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.cibertec.domain.Message;
 
 @Repository
-public interface MessageRepository extends JpaRepository<Message, String> {
+public interface MessageRepository extends JpaRepository<Message, Long> {
 }

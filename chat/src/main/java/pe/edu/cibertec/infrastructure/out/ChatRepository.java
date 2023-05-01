@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.cibertec.domain.Chat;
 
 @Repository
-public interface ChatRepository extends JpaRepository<Chat, String> {
+public interface ChatRepository extends JpaRepository<Chat, Long> {
 }
