@@ -1,6 +1,7 @@
 package pe.edu.cibertec.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class Friendship {
 
     @Column(name="create_date",  nullable = false)
     @Temporal(value=TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy/MM/dd hh:mm:ss")
     private Date create_date;
 
 }
