@@ -1,4 +1,4 @@
-package pe.edu.cibertec.domain;
+package pe.edu.cibertec.domain.entity;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "chat")
+@Table(name = "chats")
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
