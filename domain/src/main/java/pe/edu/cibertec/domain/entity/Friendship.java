@@ -1,12 +1,11 @@
-package pe.edu.cibertec.domain;
+package pe.edu.cibertec.domain.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "friendship")
+@Table(name = "friendships")
 @Data
 public class Friendship {
 

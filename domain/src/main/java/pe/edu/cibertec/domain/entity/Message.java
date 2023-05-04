@@ -1,4 +1,4 @@
-package pe.edu.cibertec.domain;
+package pe.edu.cibertec.domain.entity;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "message")
+@Table(name = "messages")
 @Data
 public class Message {
     @Id
