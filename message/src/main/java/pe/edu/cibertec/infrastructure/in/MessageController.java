@@ -25,6 +25,11 @@ public class MessageController {
         return new ResponseEntity<>(messageService.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/chat/{chatId}", method = RequestMethod.GET)
+    public ResponseEntity<List<MessageDTO>> findMessageByChatId(@PathVariable Long chatId) {
+        return new ResponseEntity<>(messageService.findMessageByChatId(chatId), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<MessageDTO> add(@RequestBody MessageDTO messageDTO) {
         return new ResponseEntity<>(messageService.save(messageDTO), HttpStatus.CREATED);

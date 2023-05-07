@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.ChatService;
 import pe.edu.cibertec.domain.dto.ChatDTO;
-
 import java.util.List;
 
 @RestController
