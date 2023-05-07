@@ -10,6 +10,7 @@ import pe.edu.cibertec.infrastructure.out.MessageRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -27,7 +28,14 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public List<MessageDTO> findMessageByChatId(Long chatId) {
+        List<Message> messages = messageRepository.findByChatId(chatId);
+        return messages.stream().map(messageMapper::messageToMessageDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public List<MessageDTO> findAll() {
+
         return messageMapper.listMessageToMessageDTO(messageRepository.findAll());
     }
 
@@ -38,6 +46,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void delete(Long messageId) {
+
         messageRepository.deleteById(messageId);
     }
 }
