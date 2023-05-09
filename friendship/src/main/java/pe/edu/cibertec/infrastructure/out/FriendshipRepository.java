@@ -1,8 +1,9 @@
 package pe.edu.cibertec.infrastructure.out;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pe.edu.cibertec.domain.Friendship;
+import org.springframework.stereotype.Repository;
+import pe.edu.cibertec.domain.entity.Friendship;
 
-public interface FriendshipRepository extends JpaRepository <Friendship, Long> {
-
+@Repository
+public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
 }

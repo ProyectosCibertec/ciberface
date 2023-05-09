@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>pe.edu.cibertec</groupId>
-            <artifactId>user</artifactId>
+            <artifactId>domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
