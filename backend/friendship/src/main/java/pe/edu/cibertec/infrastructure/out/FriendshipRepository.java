@@ -9,5 +9,5 @@ import pe.edu.cibertec.domain.entity.Friendship;
 @Repository
 public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
     @Query("SELECT COUNT(friendship) FROM Friendship friendship WHERE friendship.userId.userId = :userId")
-    int countByUserId(@Param("userId") long userId);
+    int countByUserId(@Param("userId") long userId);/**/
 }

@@ -44,5 +44,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Override
     public int getFriendsAmountByUser(long userId) {
         return friendshipRepository.countByUserId(userId);
-    }
+    }/**/
+
 }

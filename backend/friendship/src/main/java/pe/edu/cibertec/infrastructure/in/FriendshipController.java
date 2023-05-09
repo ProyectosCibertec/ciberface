@@ -44,7 +44,7 @@ public class FriendshipController {
      @GetMapping("/{userId}/friends/amount")
     public ResponseEntity<Integer> countFriendsByUserId(@PathVariable long userId) {
         int amount = friendshipService.getFriendsAmountByUser(userId);
-        return ResponseEntity.ok(amount);
+        return ResponseEntity.ok(amount);/**/
     }
 
 }
