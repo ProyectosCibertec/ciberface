@@ -40,4 +40,9 @@ public class FriendshipServiceImpl implements FriendshipService {
     public void delete(Long friendshipId) {
         friendshipRepository.deleteById(friendshipId);
     }
+
+    @Override
+    public int getFriendsAmountByUser(long userId) {
+        return friendshipRepository.countByUserId(userId);
+    }
 }
