@@ -40,7 +40,7 @@ public class MessageController {
         return new ResponseEntity<>(messageService.save(messageDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(name = "id") long id) {
         messageService.delete(id);
     }

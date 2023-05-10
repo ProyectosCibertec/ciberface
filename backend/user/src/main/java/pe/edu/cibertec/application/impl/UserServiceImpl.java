@@ -3,6 +3,7 @@ package pe.edu.cibertec.application.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.application.UserService;
+import pe.edu.cibertec.domain.dto.ChangePasswordDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
 import pe.edu.cibertec.domain.entity.User;
 import pe.edu.cibertec.domain.mapper.UserMapper;
@@ -39,5 +40,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public Integer changePassword(long userId, ChangePasswordDTO bean) {
+        if (!isOldPasswordValid(userId, bean.getOldPassword())) {
+            throw new RuntimeException("Las contraseñas no son iguales");
+        }
+        return userRepository.updateOldPassword(userId, bean.getNewPassword());
+    }
+
+    private boolean isOldPasswordValid(long userId, String oldPasswordExpected) {
+        String oldPassword = userRepository.getOldPassword(userId);
+        return oldPassword.equals(oldPasswordExpected);
     }
 }

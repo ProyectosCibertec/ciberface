@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.UserService;
+import pe.edu.cibertec.domain.dto.ChangePasswordDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
 
 import java.util.List;
@@ -35,8 +36,13 @@ public class UserController {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(name = "id") long id) {
         userService.delete(id);
+    }
+
+    @RequestMapping(value = "/{id}/change-password", method = RequestMethod.PUT)
+    public ResponseEntity<Integer> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO, @PathVariable(value = "id") long userId) {
+        return new ResponseEntity<>(userService.changePassword(userId, changePasswordDTO), HttpStatus.OK);
     }
 }
