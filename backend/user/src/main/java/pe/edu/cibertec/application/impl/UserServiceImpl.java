@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.application.UserService;
 import pe.edu.cibertec.domain.dto.ChangePasswordDTO;
+import pe.edu.cibertec.domain.dto.EditUserInformationDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
 import pe.edu.cibertec.domain.entity.User;
 import pe.edu.cibertec.domain.mapper.UserMapper;
@@ -48,6 +49,18 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Las contraseñas no son iguales");
         }
         return userRepository.updateOldPassword(userId, bean.getNewPassword());
+    }
+
+    @Override
+    public Integer editUserInformation(long userId, EditUserInformationDTO editUserInformationDTO) {
+        return userRepository.editUserInformation(
+                userId,
+                editUserInformationDTO.getUserName(),
+                editUserInformationDTO.getFirstName(),
+                editUserInformationDTO.getLastName(),
+                editUserInformationDTO.getEmail(),
+                editUserInformationDTO.getBiography(),
+                editUserInformationDTO.getPhotoUrl());
     }
 
     private boolean isOldPasswordValid(long userId, String oldPasswordExpected) {
