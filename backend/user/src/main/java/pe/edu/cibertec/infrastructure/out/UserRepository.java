@@ -38,6 +38,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             @Param("biography") String biography,
             @Param("photoUrl") String photoUrl);
 
-    @Query(value = "SELECT count(f) FROM Friendship f WHERE userId.userId = :userId OR friendId.userId = :userId")
+    @Query(value = "SELECT count(f) FROM Friendship f WHERE userId.userId = :userId")
     Integer getFriendsAmountByUser(@Param("userId") long userId);
 }
