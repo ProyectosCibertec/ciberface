@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.cibertec.domain.dto.EditUserInformationDTO;
+import pe.edu.cibertec.domain.dto.GetBasicUserInformationDTO;
 import pe.edu.cibertec.domain.entity.User;
 
 @Repository
@@ -36,4 +37,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             @Param("email") String email,
             @Param("biography") String biography,
             @Param("photoUrl") String photoUrl);
+
+    @Query(value = "SELECT count(f) FROM Friendship f WHERE userId.userId = :userId OR friendId.userId = :userId")
+    Integer getFriendsAmountByUser(@Param("userId") long userId);
 }
