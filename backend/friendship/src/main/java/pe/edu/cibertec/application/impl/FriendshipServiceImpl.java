@@ -42,6 +42,12 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
+    public int getFriendsAmountByUser(long userId) {
+        return friendshipRepository.countByUserId(userId);
+    }/**/
+
+
+    @Override
     public void createFriendship(long userId, long friendId) {
         friendshipRepository.createFriendship(userId, friendId);
         friendshipRepository.createFriendship(friendId, userId);

@@ -14,4 +14,6 @@ public interface FriendshipService {
     void delete(Long friendshipId);
 
     void createFriendship(long userId, long friendId);
+
+    int getFriendsAmountByUser(long userId);/**/
 }

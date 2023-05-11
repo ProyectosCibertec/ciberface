@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.FriendshipService;
 import pe.edu.cibertec.domain.dto.FriendshipDTO;
+import pe.edu.cibertec.domain.mapper.FriendshipMapper;
 import pe.edu.cibertec.domain.dto.UserDTO;
 
 import java.util.List;
@@ -40,6 +41,13 @@ public class FriendshipController {
     public void delete(@PathVariable(name = "id") long id) {
         friendshipService.delete(id);
     }
+
+     @GetMapping("/{userId}/friends/amount")
+    public ResponseEntity<Integer> countFriendsByUserId(@PathVariable long userId) {
+        int amount = friendshipService.getFriendsAmountByUser(userId);
+        return ResponseEntity.ok(amount);/**/
+    }
+
 
     @RequestMapping(value = "/{id}/create-friendship/{friendId}", method = RequestMethod.POST)
     public void createFriendship(@PathVariable(value = "id") long userId, @PathVariable(value = "friendId") long friendId) {
