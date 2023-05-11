@@ -57,4 +57,9 @@ public class UserController {
     public ResponseEntity<GetBasicUserInformationDTO> getBasicUserInformation(@PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.getBasicUserInformation(userId), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{id}/get-friends", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDTO>> getFriendsByUser(@PathVariable(value = "id") long userId) {
+        return new ResponseEntity<>(userService.getFriendsByUser(userId), HttpStatus.OK);
+    }
 }

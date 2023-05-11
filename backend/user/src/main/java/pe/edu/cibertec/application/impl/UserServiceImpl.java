@@ -75,6 +75,11 @@ public class UserServiceImpl implements UserService {
         throw new RuntimeException();
     }
 
+    @Override
+    public List<UserDTO> getFriendsByUser(long userId) {
+        return userMapper.listUserToUserDTO(userRepository.getFriendsByUser(userId));
+    }
+
     private boolean isOldPasswordValid(long userId, String oldPasswordExpected) {
         String oldPassword = userRepository.getOldPassword(userId);
         return oldPassword.equals(oldPasswordExpected);
