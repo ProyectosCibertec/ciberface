@@ -44,4 +44,9 @@ public class MessageController {
     public void delete(@PathVariable(name = "id") long id) {
         messageService.delete(id);
     }
+
+    @RequestMapping(value = "/get-messages-by-chat/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<MessageDTO>> getMessagesByChat(@PathVariable(name = "id") long id) {
+        return new ResponseEntity<>(messageService.getMessagesByChat(id), HttpStatus.OK);
+    }
 }
