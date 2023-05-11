@@ -23,4 +23,6 @@ public interface UserService {
     GetBasicUserInformationDTO getBasicUserInformation(long userId);
 
     List<UserDTO> getFriendsByUser(long userId);
+
+    List<UserDTO> getNoFriendsByUser(long userId);
 }

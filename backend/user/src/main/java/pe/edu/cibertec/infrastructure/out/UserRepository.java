@@ -45,4 +45,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT f.friendId FROM Friendship f WHERE f.userId.userId = :userId")
     List<User> getFriendsByUser(@Param("userId") long userId);
+
+    @Query(value = "SELECT u " +
+            "FROM User u " +
+            "LEFT JOIN Friendship f ON (u.userId = f.userId.userId AND f.friendId.userId = :userId) OR (u.userId = f.friendId.userId AND f.userId.userId = :userId) " +
+            "WHERE f.friendshipId IS NULL AND u.userId != :userId")
+    List<User> getNoFriendsByUser(@Param("userId") long userId);
 }

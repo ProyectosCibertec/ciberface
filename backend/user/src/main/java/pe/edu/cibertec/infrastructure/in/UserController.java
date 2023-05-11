@@ -62,4 +62,9 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getFriendsByUser(@PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.getFriendsByUser(userId), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{id}/get-no-friends", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDTO>> getNoFriendsByUser(@PathVariable(value = "id") long userId) {
+        return new ResponseEntity<>(userService.getNoFriendsByUser(userId), HttpStatus.OK);
+    }
 }
