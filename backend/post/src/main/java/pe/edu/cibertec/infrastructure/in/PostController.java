@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.PostService;
+import pe.edu.cibertec.domain.dto.GetPostsByContent;
 import pe.edu.cibertec.domain.dto.PostDTO;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class PostController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(name = "id") long id) {
         postService.delete(id);
+    }
+
+    @RequestMapping(value = "/get-by-content/{pattern}", method = RequestMethod.GET)
+    public ResponseEntity<List<PostDTO>> getPostsByContent(@PathVariable("pattern") String pattern) {
+        return new ResponseEntity<>(postService.getPostsByContent(pattern), HttpStatus.OK);
     }
 }

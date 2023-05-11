@@ -3,6 +3,7 @@ package pe.edu.cibertec.application.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.application.PostService;
+import pe.edu.cibertec.domain.dto.GetPostsByContent;
 import pe.edu.cibertec.domain.dto.PostDTO;
 import pe.edu.cibertec.domain.entity.Post;
 import pe.edu.cibertec.domain.mapper.PostMapper;
@@ -39,5 +40,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long postId) {
         postRepository.deleteById(postId);
+    }
+
+    @Override
+    public List<PostDTO> getPostsByContent(String pattern) {
+        return postMapper.listPostToPostDTO(postRepository.getPostsByContent(pattern));
     }
 }

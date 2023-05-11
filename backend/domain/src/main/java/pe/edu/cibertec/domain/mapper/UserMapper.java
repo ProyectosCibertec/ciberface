@@ -2,6 +2,7 @@ package pe.edu.cibertec.domain.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import pe.edu.cibertec.domain.dto.GetBasicUserInformationDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
 import pe.edu.cibertec.domain.entity.User;
 
@@ -18,4 +19,6 @@ public interface UserMapper {
     List<UserDTO> listUserToUserDTO(List<User> user);
 
     List<User> listUserDTOToUser(List<UserDTO> userDTOList);
+
+    GetBasicUserInformationDTO userToGetBasicUserInformationDTO(User user);
 }

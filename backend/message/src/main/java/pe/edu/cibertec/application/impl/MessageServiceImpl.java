@@ -46,7 +46,11 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void delete(Long messageId) {
-
         messageRepository.deleteById(messageId);
+    }
+
+    @Override
+    public List<MessageDTO> getMessagesByChat(Long id) {
+        return messageMapper.listMessageToMessageDTO(messageRepository.findByChatId(id));
     }
 }

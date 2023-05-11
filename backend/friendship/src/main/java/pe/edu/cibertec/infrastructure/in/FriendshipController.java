@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.FriendshipService;
 import pe.edu.cibertec.domain.dto.FriendshipDTO;
 import pe.edu.cibertec.domain.mapper.FriendshipMapper;
+import pe.edu.cibertec.domain.dto.UserDTO;
 
 import java.util.List;
 
@@ -47,4 +48,9 @@ public class FriendshipController {
         return ResponseEntity.ok(amount);/**/
     }
 
+
+    @RequestMapping(value = "/{id}/create-friendship/{friendId}", method = RequestMethod.POST)
+    public void createFriendship(@PathVariable(value = "id") long userId, @PathVariable(value = "friendId") long friendId) {
+        friendshipService.createFriendship(userId, friendId);
+    }
 }
