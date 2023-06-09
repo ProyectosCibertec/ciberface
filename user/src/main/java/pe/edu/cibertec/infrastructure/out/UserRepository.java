@@ -14,6 +14,8 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUserName(String username);
+
     @Query(value = "SELECT password FROM User u WHERE u.userId = :userId")
     String getOldPassword(@Param("userId") long userId);
 
