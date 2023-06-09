@@ -25,6 +25,7 @@
         <module>app</module>
         <module>domain</module>
         <module>config</module>
+        <module>auth</module>
     </modules>
     <dependencies>
         <dependency>
@@ -51,6 +52,10 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 </project>
