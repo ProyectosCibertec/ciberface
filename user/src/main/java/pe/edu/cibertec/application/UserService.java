@@ -25,4 +25,6 @@ public interface UserService {
     List<UserDTO> getFriendsByUser(long userId);
 
     List<UserDTO> getNoFriendsByUser(long userId);
+
+    GetBasicUserInformationDTO findByUserName(String username);
 }

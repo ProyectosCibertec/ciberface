@@ -1,6 +1,7 @@
 package pe.edu.cibertec.application.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.application.UserService;
 import pe.edu.cibertec.domain.dto.ChangePasswordDTO;
@@ -16,9 +17,14 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
-    private UserMapper userMapper = UserMapper.INSTANCE;
+    private final UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper = UserMapper.INSTANCE;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDTO find(Long userId) {
@@ -36,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO save(UserDTO userDTO) {
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return userMapper.userToUserDTO(userRepository.save(userMapper.userDTOToUser(userDTO)));
     }
 
@@ -83,6 +90,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getNoFriendsByUser(long userId) {
         return userMapper.listUserToUserDTO(userRepository.getNoFriendsByUser(userId));
+    }
+
+    @Override
+    public GetBasicUserInformationDTO findByUserName(String username) {
+        return userMapper.userToGetBasicUserInformationDTO(userRepository.findByUserName(username));
     }
 
     private boolean isOldPasswordValid(long userId, String oldPasswordExpected) {

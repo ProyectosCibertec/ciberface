@@ -2,18 +2,18 @@ package pe.edu.cibertec.domain.dto;
 
 import java.io.Serializable;
 
-public class JwTRequestDTO implements Serializable {
+public class LoginDTO implements Serializable {
 
     private static final long serialVersionUID = 5926468583005150707L;
 
     private String username;
     private String password;
 
-    public JwTRequestDTO() {
+    public LoginDTO() {
 
     }
 
-    public JwTRequestDTO(String username, String password) {
+    public LoginDTO(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
     }
