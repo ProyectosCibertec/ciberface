@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
-    private CommentMapper commentMapper = CommentMapper.INSTANCE;
+    private final CommentMapper commentMapper = CommentMapper.INSTANCE;
 
     @Override
     public CommentDTO find(Long commentId) {
@@ -39,5 +39,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    @Override
+    public List<CommentDTO> findByPostId(long postId) {
+        return commentMapper.listCommentToCommentDTO(commentRepository.findByPostId(postId));
     }
 }
