@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.PostService;
-import pe.edu.cibertec.domain.dto.GetPostsByContent;
 import pe.edu.cibertec.domain.dto.PostDTO;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -23,7 +23,9 @@ public class PostController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<PostDTO>> list() {
-        return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
+        List<PostDTO> dtos = postService.findAll();
+        Collections.reverse(dtos);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

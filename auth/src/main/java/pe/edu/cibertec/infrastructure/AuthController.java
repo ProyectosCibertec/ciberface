@@ -9,34 +9,34 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.cibertec.domain.dto.JwTRequestDTO;
-import pe.edu.cibertec.domain.dto.JwtResponseDTO;
+import pe.edu.cibertec.application.UserService;
+import pe.edu.cibertec.domain.dto.LoginDTO;
+import pe.edu.cibertec.domain.dto.TokenDTO;
 import pe.edu.cibertec.domain.util.JwtTokenUtil;
 
 @RestController
 @CrossOrigin
-public class JwtAuthenticationController {
+public class AuthController {
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserDetailsService userDetailsService;
+    private final UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwTRequestDTO authenticationRequest) throws Exception {
-
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
-
         final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponseDTO(token));
+        final long userId = userService.findByUserName(authenticationRequest.getUsername()).getUserId();
+        return ResponseEntity.ok(new TokenDTO(token, userId));
     }
 
     private void authenticate(String username, String password) throws Exception {
