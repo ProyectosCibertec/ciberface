@@ -22,14 +22,15 @@ import pe.edu.cibertec.infrastructure.JwtRequestFilter;
 @EnableWebSecurity
 public class AuthConfig {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final UserDetailsService jwtUserDetailsService;
+    private final JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private UserDetailsService jwtUserDetailsService;
-
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    public AuthConfig (JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserDetailsService jwtUserDetailsService, JwtRequestFilter jwtRequestFilter) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtUserDetailsService = jwtUserDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -14,10 +14,12 @@ import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
-    @Autowired
-    private PostRepository postRepository;
-    private PostMapper postMapper = PostMapper.INSTANCE;
 
+    private final PostRepository postRepository;
+    private PostMapper postMapper = PostMapper.INSTANCE;
+    public PostServiceImpl(PostRepository postRepository){
+        this.postRepository = postRepository;
+    }
     @Override
     public PostDTO find(Long postId) {
         Optional<Post> post = postRepository.findById(postId);

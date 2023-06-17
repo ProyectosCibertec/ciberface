@@ -13,10 +13,13 @@ import java.util.Optional;
 
 @Service
 public class FriendshipServiceImpl implements FriendshipService {
-    @Autowired
-    private FriendshipRepository friendshipRepository;
+
+    private final FriendshipRepository friendshipRepository;
     private FriendshipMapper friendshipMapper = FriendshipMapper.INSTANCE;
 
+    public FriendshipServiceImpl(FriendshipRepository friendshipRepository){
+        this.friendshipRepository = friendshipRepository;
+    }
     @Override
     public FriendshipDTO find(Long friendshipId) {
         Optional<Friendship> friendship = friendshipRepository.findById(friendshipId);
