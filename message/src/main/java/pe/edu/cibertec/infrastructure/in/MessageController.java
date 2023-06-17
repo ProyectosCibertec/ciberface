@@ -12,9 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/message")
 public class MessageController {
-    @Autowired
-    private MessageService messageService;
 
+    private final MessageService messageService;
+    public MessageController(MessageService messageService){
+        this.messageService = messageService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<MessageDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(messageService.find(id), HttpStatus.OK);

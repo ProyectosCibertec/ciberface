@@ -14,9 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/friendship")
 public class FriendshipController {
-    @Autowired
-    private FriendshipService friendshipService;
 
+    private final FriendshipService friendshipService;
+
+    public FriendshipController(FriendshipService friendshipService){
+        this.friendshipService = friendshipService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<FriendshipDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(friendshipService.find(id), HttpStatus.OK);

@@ -13,9 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/post")
 public class PostController {
-    @Autowired
-    private PostService postService;
 
+    private final PostService postService;
+
+    public PostController(PostService postService){
+        this.postService = postService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<PostDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(postService.find(id), HttpStatus.OK);

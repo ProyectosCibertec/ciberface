@@ -12,9 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/comment")
 public class CommentController {
-    @Autowired
-    private CommentService commentService;
 
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService){
+        this.commentService = commentService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CommentDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(commentService.find(id), HttpStatus.OK);

@@ -9,15 +9,19 @@ import pe.edu.cibertec.domain.dto.ChangePasswordDTO;
 import pe.edu.cibertec.domain.dto.EditUserInformationDTO;
 import pe.edu.cibertec.domain.dto.GetBasicUserInformationDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
+import pe.edu.cibertec.domain.entity.User;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
 
+    private final UserService userService;
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(userService.find(id), HttpStatus.OK);
