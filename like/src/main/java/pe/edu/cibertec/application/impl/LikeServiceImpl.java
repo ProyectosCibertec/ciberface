@@ -13,10 +13,13 @@ import java.util.Optional;
 
 @Service
 public class LikeServiceImpl implements LikeService {
-    @Autowired
-    private LikeRepository likeRepository;
+
+    private final LikeRepository likeRepository;
     private LikeMapper likeMapper = LikeMapper.INSTANCE;
 
+    public LikeServiceImpl(LikeRepository likeRepository){
+        this.likeRepository = likeRepository;
+    }
     @Override
     public LikeDTO find(Long likeId) {
         Optional<Like> like = likeRepository.findById(likeId);

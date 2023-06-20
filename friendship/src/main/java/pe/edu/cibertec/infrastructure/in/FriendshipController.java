@@ -13,10 +13,9 @@ import java.util.List;
 public class FriendshipController {
     private final FriendshipService friendshipService;
 
-    public FriendshipController(FriendshipService friendshipService) {
+    public FriendshipController(FriendshipService friendshipService){
         this.friendshipService = friendshipService;
     }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<FriendshipDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(friendshipService.find(id), HttpStatus.OK);

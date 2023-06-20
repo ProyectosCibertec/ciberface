@@ -12,9 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/like")
 public class LikeController {
-    @Autowired
-    private LikeService likeService;
 
+    private final LikeService likeService;
+
+    public LikeController(LikeService likeService){
+        this.likeService = likeService;
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<LikeDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(likeService.find(id), HttpStatus.OK);

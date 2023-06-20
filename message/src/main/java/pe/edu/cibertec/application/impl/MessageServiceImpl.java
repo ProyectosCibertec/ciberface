@@ -14,10 +14,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class MessageServiceImpl implements MessageService {
-    @Autowired
-    private MessageRepository messageRepository;
+
+    private final MessageRepository messageRepository;
     private MessageMapper messageMapper = MessageMapper.INSTANCE;
 
+    public MessageServiceImpl(MessageRepository messageRepository){
+        this.messageRepository = messageRepository;
+    }
     @Override
     public MessageDTO find(Long messageId) {
         Optional<Message> message = messageRepository.findById(messageId);

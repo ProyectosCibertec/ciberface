@@ -11,9 +11,12 @@ import pe.edu.cibertec.infrastructure.out.UserRepository;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
+
+    public JwtUserDetailsService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username);

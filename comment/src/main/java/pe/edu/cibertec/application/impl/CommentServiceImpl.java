@@ -13,9 +13,12 @@ import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    @Autowired
-    private CommentRepository commentRepository;
-    private final CommentMapper commentMapper = CommentMapper.INSTANCE;
+    private final CommentRepository commentRepository;
+    private CommentMapper commentMapper = CommentMapper.INSTANCE;
+
+    public CommentServiceImpl(CommentRepository commentRepository){
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     public CommentDTO find(Long commentId) {

@@ -11,8 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/chat")
 public class ChatController {
-    @Autowired
-    private ChatService chatService;
+
+    private final ChatService chatService;
+
+    public ChatController(ChatService chatService){
+        this.chatService = chatService;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ChatDTO> get(@PathVariable(name = "id") long id) {

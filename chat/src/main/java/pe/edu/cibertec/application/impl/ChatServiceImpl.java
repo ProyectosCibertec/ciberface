@@ -13,9 +13,12 @@ import java.util.Optional;
 
 @Service
 public class ChatServiceImpl implements ChatService {
-    @Autowired
-    private ChatRepository chatRepository;
-    private final ChatMapper chatMapper = ChatMapper.INSTANCE;
+    private final ChatRepository chatRepository;
+    private ChatMapper chatMapper = ChatMapper.INSTANCE;
+
+    public ChatServiceImpl (ChatRepository chatRepository){
+        this.chatRepository = chatRepository;
+    }
 
     @Override
     public ChatDTO find(Long chatId) {
