@@ -3,7 +3,6 @@ package pe.edu.cibertec.domain.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
@@ -14,7 +13,6 @@ public class Chat {
     @Column(name = "chat_id")
     private long chatId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "friendship_id", nullable = false)
-    private Friendship friendshipId;
+    @Column(name = "is_blocked")
+    private int isBlocked;
 }

@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.CommentService;
 import pe.edu.cibertec.domain.dto.CommentDTO;
+import pe.edu.cibertec.domain.dto.PostDTO;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,9 @@ public class CommentController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<CommentDTO>> list() {
-        return new ResponseEntity<>(commentService.findAll(), HttpStatus.OK);
+        List<CommentDTO> dtos = commentService.findAll();
+        Collections.reverse(dtos);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -41,5 +45,10 @@ public class CommentController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(name = "id") long id) {
         commentService.delete(id);
+    }
+
+    @RequestMapping(value = "/list-by-post", method = RequestMethod.GET)
+    public ResponseEntity<List<CommentDTO>> listByPost(@RequestParam("postId") long postId) {
+        return new ResponseEntity<>(commentService.findByPostId(postId), HttpStatus.OK);
     }
 }

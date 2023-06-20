@@ -4,8 +4,10 @@ import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pe.edu.cibertec.domain.entity.Comment;
 import pe.edu.cibertec.domain.entity.Post;
 import pe.edu.cibertec.domain.entity.User;
+import pe.edu.cibertec.infrastructure.out.CommentRepository;
 import pe.edu.cibertec.infrastructure.out.PostRepository;
 import pe.edu.cibertec.infrastructure.out.UserRepository;
 
@@ -18,16 +20,19 @@ import java.util.stream.IntStream;
 public class GenerateSampleData implements CommandLineRunner {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
     private final PasswordEncoder passwordEncoder;
     private final Faker faker;
 
     public GenerateSampleData(
             PostRepository postRepository,
             UserRepository userRepository,
+            CommentRepository commentRepository,
             PasswordEncoder passwordEncoder,
             Faker faker) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.commentRepository = commentRepository;
         this.passwordEncoder = passwordEncoder;
         this.faker = faker;
     }
@@ -58,5 +63,18 @@ public class GenerateSampleData implements CommandLineRunner {
                     return post;
                 }).collect(Collectors.toList());
         postRepository.saveAll(posts);
+
+        List<Comment> comments = IntStream.rangeClosed(1, 5)
+                .mapToObj(i -> {
+                    User user = users.get(faker.number().numberBetween(0, 5));
+                    Post post = posts.get(faker.number().numberBetween(0, 5));
+                    Comment comment = new Comment();
+                    comment.setPostId(post);
+                    comment.setCommentContent(faker.friends().quote());
+                    comment.setCreationDate(new Date());
+                    comment.setUserId(user);
+                    return comment;
+                }).collect(Collectors.toList());
+        commentRepository.saveAll(comments);
     }
 }
