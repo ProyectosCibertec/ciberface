@@ -16,6 +16,7 @@ public class FriendshipController {
     public FriendshipController(FriendshipService friendshipService){
         this.friendshipService = friendshipService;
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<FriendshipDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(friendshipService.find(id), HttpStatus.OK);
@@ -36,14 +37,23 @@ public class FriendshipController {
         return new ResponseEntity<>(friendshipService.save(friendshipDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         friendshipService.delete(id);
     }
 
-    @GetMapping("/{userId}/friends/amount")
+    @GetMapping(value = "/{userId}/friends/amount")
     public ResponseEntity<Integer> countFriendsByUserId(@PathVariable long userId) {
         int amount = friendshipService.getFriendsAmountByUser(userId);
         return ResponseEntity.ok(amount);
+    }
+
+    @GetMapping(value = "/get-by-user-friend-id")
+    public ResponseEntity<FriendshipDTO> getByFriendAndUserIds(
+            @RequestParam(value = "userId") Long userId,
+            @RequestParam(value = "friendId") Long friendId
+    ) {
+        FriendshipDTO friendshipDTO = friendshipService.getByFriendAndUserIds(userId, friendId);
+        return ResponseEntity.ok(friendshipDTO);
     }
 }

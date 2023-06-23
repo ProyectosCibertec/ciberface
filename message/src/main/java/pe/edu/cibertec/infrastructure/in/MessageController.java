@@ -12,11 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/message")
 public class MessageController {
-
     private final MessageService messageService;
+
     public MessageController(MessageService messageService){
         this.messageService = messageService;
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<MessageDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(messageService.find(id), HttpStatus.OK);
@@ -42,13 +43,13 @@ public class MessageController {
         return new ResponseEntity<>(messageService.save(messageDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         messageService.delete(id);
     }
 
-    @RequestMapping(value = "/get-messages-by-chat/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<MessageDTO>> getMessagesByChat(@PathVariable(name = "id") long id) {
-        return new ResponseEntity<>(messageService.getMessagesByChat(id), HttpStatus.OK);
+    @RequestMapping(value = "/get-by-chat", method = RequestMethod.GET)
+    public ResponseEntity<List<MessageDTO>> getByChatId(@RequestParam(name = "chatId") Long chatId) {
+        return new ResponseEntity<>(messageService.getByChatId(chatId), HttpStatus.OK);
     }
 }

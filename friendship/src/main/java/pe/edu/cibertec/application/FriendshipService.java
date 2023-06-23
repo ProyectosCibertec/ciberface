@@ -13,5 +13,7 @@ public interface FriendshipService {
 
     void delete(Long friendshipId);
 
-    int getFriendsAmountByUser(long userId);/**/
+    int getFriendsAmountByUser(Long userId);
+
+    FriendshipDTO getByFriendAndUserIds(Long userId, Long friendId);
 }

@@ -15,5 +15,5 @@ public interface MessageService {
 
     void delete(Long messageId);
 
-    List<MessageDTO> getMessagesByChat(Long id);
+    List<MessageDTO> getByChatId(Long chatId);
 }

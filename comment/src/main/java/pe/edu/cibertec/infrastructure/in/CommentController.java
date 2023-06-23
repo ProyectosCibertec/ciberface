@@ -42,7 +42,7 @@ public class CommentController {
         return new ResponseEntity<>(commentService.save(commentDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         commentService.delete(id);
     }

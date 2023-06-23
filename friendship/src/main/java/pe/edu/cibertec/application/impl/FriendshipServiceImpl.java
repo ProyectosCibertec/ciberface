@@ -55,7 +55,12 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
-    public int getFriendsAmountByUser(long userId) {
+    public int getFriendsAmountByUser(Long userId) {
         return friendshipRepository.countByUserId(userId);
+    }
+
+    @Override
+    public FriendshipDTO getByFriendAndUserIds(Long userId, Long friendId) {
+        return friendshipMapper.friendshipToFriendshipDTO(friendshipRepository.getByFriendAndUserIds(userId, friendId));
     }
 }
