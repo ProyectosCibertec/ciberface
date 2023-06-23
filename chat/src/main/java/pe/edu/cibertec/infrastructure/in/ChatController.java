@@ -38,7 +38,7 @@ public class ChatController {
         return new ResponseEntity<>(chatService.save(chatDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         chatService.delete(id);
     }

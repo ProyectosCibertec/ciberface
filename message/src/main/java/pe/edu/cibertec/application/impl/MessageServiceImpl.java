@@ -53,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageDTO> getMessagesByChat(Long id) {
-        return messageMapper.listMessageToMessageDTO(messageRepository.findByChatId(id));
+    public List<MessageDTO> getByChatId(Long chatId) {
+        return messageMapper.listMessageToMessageDTO(messageRepository.findByChatId(chatId));
     }
 }

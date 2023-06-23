@@ -16,12 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService){
         this.userService = userService;
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(userService.find(id), HttpStatus.OK);
@@ -42,7 +42,7 @@ public class UserController {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         userService.delete(id);
     }

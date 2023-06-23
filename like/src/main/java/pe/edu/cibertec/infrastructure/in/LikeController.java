@@ -38,7 +38,7 @@ public class LikeController {
         return new ResponseEntity<>(likeService.save(likeDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable(name = "id") long id) {
         likeService.delete(id);
     }
