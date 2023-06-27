@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.LikeService;
 import pe.edu.cibertec.domain.dto.LikeDTO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,23 +19,23 @@ public class LikeController {
     public LikeController(LikeService likeService){
         this.likeService = likeService;
     }
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<LikeDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(likeService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<LikeDTO>> list() {
         return new ResponseEntity<>(likeService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<LikeDTO> add(@RequestBody LikeDTO likeDTO) {
+    @PostMapping
+    public ResponseEntity<LikeDTO> add(@Valid @RequestBody LikeDTO likeDTO) {
         return new ResponseEntity<>(likeService.save(likeDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<LikeDTO> edit(@RequestBody LikeDTO likeDTO) {
+    @PutMapping
+    public ResponseEntity<LikeDTO> edit(@Valid @RequestBody LikeDTO likeDTO) {
         return new ResponseEntity<>(likeService.save(likeDTO), HttpStatus.CREATED);
     }
 

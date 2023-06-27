@@ -11,6 +11,7 @@ import pe.edu.cibertec.domain.dto.GetBasicUserInformationDTO;
 import pe.edu.cibertec.domain.dto.UserDTO;
 import pe.edu.cibertec.domain.entity.User;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,23 +23,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(userService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<UserDTO>> list() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<UserDTO> add(@RequestBody UserDTO userDTO) {
+    @PostMapping
+    public ResponseEntity<UserDTO> add(@Valid @RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<UserDTO> edit(@RequestBody UserDTO userDTO) {
+    @PutMapping
+    public ResponseEntity<UserDTO> edit(@Valid @RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
     }
 
@@ -47,27 +48,27 @@ public class UserController {
         userService.delete(id);
     }
 
-    @RequestMapping(value = "/{id}/change-password", method = RequestMethod.PUT)
-    public ResponseEntity<Integer> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO, @PathVariable(value = "id") long userId) {
+    @PutMapping(value = "/{id}/change-password")
+    public ResponseEntity<Integer> changePassword(@Valid @RequestBody ChangePasswordDTO changePasswordDTO, @PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.changePassword(userId, changePasswordDTO), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/edit-user-information", method = RequestMethod.PUT)
-    public ResponseEntity<Integer> editUserInformation(@RequestBody EditUserInformationDTO editUserInformationDTO, @PathVariable(value = "id") long userId) {
+    @PutMapping(value = "/{id}/edit-user-information")
+    public ResponseEntity<Integer> editUserInformation(@Valid @RequestBody EditUserInformationDTO editUserInformationDTO, @PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.editUserInformation(userId, editUserInformationDTO), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/get-basic-information", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}/get-basic-information")
     public ResponseEntity<GetBasicUserInformationDTO> getBasicUserInformation(@PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.getBasicUserInformation(userId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/get-friends", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}/get-friends")
     public ResponseEntity<List<UserDTO>> getFriendsByUser(@PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.getFriendsByUser(userId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/get-no-friends", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}/get-no-friends")
     public ResponseEntity<List<UserDTO>> getNoFriendsByUser(@PathVariable(value = "id") long userId) {
         return new ResponseEntity<>(userService.getNoFriendsByUser(userId), HttpStatus.OK);
     }

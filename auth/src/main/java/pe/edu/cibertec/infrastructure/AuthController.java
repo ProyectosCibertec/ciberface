@@ -29,7 +29,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @PostMapping(value = "/auth")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
