@@ -9,5 +9,4 @@ public interface CommentService {
     List<CommentDTO> findAll();
     CommentDTO save(CommentDTO commentDTO);
     void delete(Long commentId);
-    List<CommentDTO> findByPostId(long postId);
 }

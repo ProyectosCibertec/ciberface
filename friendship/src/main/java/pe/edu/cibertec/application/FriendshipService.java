@@ -9,11 +9,11 @@ public interface FriendshipService {
 
     List<FriendshipDTO> findAll();
 
-    Integer save(FriendshipDTO friendshipDTO);
+    FriendshipDTO save(FriendshipDTO friendshipDTO);
 
     void delete(Long friendshipId);
 
-    int getFriendsAmountByUser(Long userId);
+    void createFriendship(long userId, long friendId);
 
-    FriendshipDTO getByFriendAndUserIds(Long userId, Long friendId);
+    int getFriendsAmountByUser(long userId);/**/
 }

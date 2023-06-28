@@ -13,13 +13,13 @@ import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+
     private final CommentRepository commentRepository;
     private CommentMapper commentMapper = CommentMapper.INSTANCE;
 
     public CommentServiceImpl(CommentRepository commentRepository){
         this.commentRepository = commentRepository;
     }
-
     @Override
     public CommentDTO find(Long commentId) {
         Optional<Comment> comment = commentRepository.findById(commentId);
@@ -42,10 +42,5 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long commentId) {
         commentRepository.deleteById(commentId);
-    }
-
-    @Override
-    public List<CommentDTO> findByPostId(long postId) {
-        return commentMapper.listCommentToCommentDTO(commentRepository.findByPostId(postId));
     }
 }

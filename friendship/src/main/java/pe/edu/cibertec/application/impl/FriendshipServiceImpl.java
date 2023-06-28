@@ -1,31 +1,25 @@
 package pe.edu.cibertec.application.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.application.FriendshipService;
 import pe.edu.cibertec.domain.dto.FriendshipDTO;
-import pe.edu.cibertec.domain.entity.Chat;
 import pe.edu.cibertec.domain.entity.Friendship;
-import pe.edu.cibertec.domain.mapper.ChatMapper;
 import pe.edu.cibertec.domain.mapper.FriendshipMapper;
-import pe.edu.cibertec.infrastructure.out.ChatRepository;
 import pe.edu.cibertec.infrastructure.out.FriendshipRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FriendshipServiceImpl implements FriendshipService {
+
     private final FriendshipRepository friendshipRepository;
-    private final ChatRepository chatRepository;
-    private final FriendshipMapper friendshipMapper = FriendshipMapper.INSTANCE;
-    private final ChatMapper chatMapper = ChatMapper.INSTANCE;
+    private FriendshipMapper friendshipMapper = FriendshipMapper.INSTANCE;
 
-    public FriendshipServiceImpl(FriendshipRepository friendshipRepository, ChatRepository chatRepository) {
+    public FriendshipServiceImpl(FriendshipRepository friendshipRepository){
         this.friendshipRepository = friendshipRepository;
-        this.chatRepository = chatRepository;
     }
-
     @Override
     public FriendshipDTO find(Long friendshipId) {
         Optional<Friendship> friendship = friendshipRepository.findById(friendshipId);
@@ -40,13 +34,9 @@ public class FriendshipServiceImpl implements FriendshipService {
         return friendshipMapper.listFriendshipToFriendshipDTO(friendshipRepository.findAll());
     }
 
-    @Transactional
     @Override
-    public Integer save(FriendshipDTO friendshipDTO) {
-        Chat chat = chatRepository.save(chatMapper.chatDTOToChat(friendshipDTO.getChatId()));
-        friendshipRepository.createFriendship(friendshipDTO.getUserId().getUserId(), friendshipDTO.getFriendId().getUserId(), chat.getChatId());
-        friendshipRepository.createFriendship(friendshipDTO.getFriendId().getUserId(), friendshipDTO.getUserId().getUserId(), chat.getChatId());
-        return 1;
+    public FriendshipDTO save(FriendshipDTO friendshipDTO) {
+        return friendshipMapper.friendshipToFriendshipDTO(friendshipRepository.save(friendshipMapper.friendshipDTOToFriendship(friendshipDTO)));
     }
 
     @Override
@@ -57,6 +47,13 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Override
     public int getFriendsAmountByUser(Long userId) {
         return friendshipRepository.countByUserId(userId);
+    }/**/
+
+
+    @Override
+    public void createFriendship(long userId, long friendId) {
+        friendshipRepository.createFriendship(userId, friendId);
+        friendshipRepository.createFriendship(friendId, userId);
     }
 
     @Override

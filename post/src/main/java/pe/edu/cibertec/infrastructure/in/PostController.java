@@ -27,7 +27,9 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PostDTO>> list() {
-        return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
+        List<PostDTO> dtos = postService.findAll();
+        Collections.reverse(dtos);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @PostMapping
