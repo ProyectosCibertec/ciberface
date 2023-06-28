@@ -46,7 +46,7 @@ public class AuthConfig {
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests().antMatchers("/swagger-ui/").permitAll().and()
-                .authorizeRequests().antMatchers("/api/user/").permitAll().and()
+                .authorizeRequests().antMatchers("/api/user").permitAll().and()
                 .authorizeRequests().antMatchers("/websocket/chat").permitAll().and()
                 .authorizeRequests().antMatchers("/auth").permitAll().
                         anyRequest().authenticated().and().

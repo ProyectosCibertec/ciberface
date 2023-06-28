@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.FriendshipService;
 import pe.edu.cibertec.domain.dto.FriendshipDTO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,23 +18,23 @@ public class FriendshipController {
         this.friendshipService = friendshipService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<FriendshipDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(friendshipService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<FriendshipDTO>> list() {
         return new ResponseEntity<>(friendshipService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Integer> add(@RequestBody FriendshipDTO friendshipDTO) {
+    @PostMapping
+    public ResponseEntity<Integer> add(@Valid @RequestBody FriendshipDTO friendshipDTO) {
         return new ResponseEntity<>(friendshipService.save(friendshipDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<Integer> edit(@RequestBody FriendshipDTO friendshipDTO) {
+    @PutMapping
+    public ResponseEntity<Integer> edit(@Valid @RequestBody FriendshipDTO friendshipDTO) {
         return new ResponseEntity<>(friendshipService.save(friendshipDTO), HttpStatus.CREATED);
     }
 

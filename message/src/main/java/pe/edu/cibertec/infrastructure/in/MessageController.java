@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.MessageService;
 import pe.edu.cibertec.domain.dto.MessageDTO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,28 +19,28 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<MessageDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(messageService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<MessageDTO>> list() {
         return new ResponseEntity<>(messageService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/chat/{chatId}", method = RequestMethod.GET)
+    @GetMapping(value = "/chat/{chatId}")
     public ResponseEntity<List<MessageDTO>> findMessageByChatId(@PathVariable Long chatId) {
         return new ResponseEntity<>(messageService.findMessageByChatId(chatId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<MessageDTO> add(@RequestBody MessageDTO messageDTO) {
+    @PostMapping
+    public ResponseEntity<MessageDTO> add(@Valid @RequestBody MessageDTO messageDTO) {
         return new ResponseEntity<>(messageService.save(messageDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<MessageDTO> edit(@RequestBody MessageDTO messageDTO) {
+    @PutMapping
+    public ResponseEntity<MessageDTO> edit(@Valid @RequestBody MessageDTO messageDTO) {
         return new ResponseEntity<>(messageService.save(messageDTO), HttpStatus.CREATED);
     }
 
@@ -48,7 +49,7 @@ public class MessageController {
         messageService.delete(id);
     }
 
-    @RequestMapping(value = "/get-by-chat", method = RequestMethod.GET)
+    @GetMapping(value = "/get-by-chat")
     public ResponseEntity<List<MessageDTO>> getByChatId(@RequestParam(name = "chatId") Long chatId) {
         return new ResponseEntity<>(messageService.getByChatId(chatId), HttpStatus.OK);
     }

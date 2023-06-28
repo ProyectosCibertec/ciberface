@@ -1,12 +1,14 @@
 package pe.edu.cibertec.domain.dto;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class LoginDTO implements Serializable {
-
     private static final long serialVersionUID = 5926468583005150707L;
 
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 
     public LoginDTO() {

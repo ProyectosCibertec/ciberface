@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.PostService;
 import pe.edu.cibertec.domain.dto.PostDTO;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,23 +20,23 @@ public class PostController {
     public PostController(PostService postService){
         this.postService = postService;
     }
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<PostDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(postService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<PostDTO>> list() {
         return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<PostDTO> add(@RequestBody PostDTO postDTO) {
+    @PostMapping
+    public ResponseEntity<PostDTO> add(@Valid @RequestBody PostDTO postDTO) {
         return new ResponseEntity<>(postService.save(postDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<PostDTO> edit(@RequestBody PostDTO postDTO) {
+    @PutMapping
+    public ResponseEntity<PostDTO> edit(@Valid @RequestBody PostDTO postDTO) {
         return new ResponseEntity<>(postService.save(postDTO), HttpStatus.CREATED);
     }
 
@@ -44,7 +45,7 @@ public class PostController {
         postService.delete(id);
     }
 
-    @RequestMapping(value = "/get-by-content/{pattern}", method = RequestMethod.GET)
+    @GetMapping(value = "/get-by-content/{pattern}")
     public ResponseEntity<List<PostDTO>> getPostsByContent(@PathVariable("pattern") String pattern) {
         return new ResponseEntity<>(postService.getPostsByContent(pattern), HttpStatus.OK);
     }

@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.application.ChatService;
 import pe.edu.cibertec.domain.dto.ChatDTO;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,23 +20,23 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ChatDTO> get(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(chatService.find(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<ChatDTO>> list() {
         return new ResponseEntity<>(chatService.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<ChatDTO> add(@RequestBody ChatDTO chatDTO) {
+    @PostMapping
+    public ResponseEntity<ChatDTO> add(@Valid @RequestBody ChatDTO chatDTO) {
         return new ResponseEntity<>(chatService.save(chatDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity<ChatDTO> edit(@RequestBody ChatDTO chatDTO) {
+    @PutMapping
+    public ResponseEntity<ChatDTO> edit(@Valid @RequestBody ChatDTO chatDTO) {
         return new ResponseEntity<>(chatService.save(chatDTO), HttpStatus.CREATED);
     }
 
