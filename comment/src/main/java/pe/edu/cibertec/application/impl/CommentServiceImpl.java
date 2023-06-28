@@ -19,7 +19,6 @@ public class CommentServiceImpl implements CommentService {
     public CommentServiceImpl(CommentRepository commentRepository){
         this.commentRepository = commentRepository;
     }
-
     @Override
     public CommentDTO find(Long commentId) {
         Optional<Comment> comment = commentRepository.findById(commentId);
