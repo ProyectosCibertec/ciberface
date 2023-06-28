@@ -8,5 +8,5 @@ import java.io.Serializable;
 public class ChatDTO implements Serializable {
     @NotNull
     private long chatId;
-    private FriendshipDTO friendshipId;
+    private int isBlocked;
 }

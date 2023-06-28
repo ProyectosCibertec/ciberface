@@ -3,7 +3,7 @@ package pe.edu.cibertec.domain.dto;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 public class FriendshipDTO implements Serializable {
@@ -13,4 +13,6 @@ public class FriendshipDTO implements Serializable {
     private UserDTO userId;
     @NotNull
     private UserDTO friendId;
+    @NotNull
+    private ChatDTO chatId;
 }
