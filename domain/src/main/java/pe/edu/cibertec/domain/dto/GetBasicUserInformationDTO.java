@@ -14,6 +14,7 @@ public class GetBasicUserInformationDTO implements Serializable {
     private String lastName;
     @NotEmpty
     private String userName;
+    private String email;
     private String biography;
     private String photoUrl;
     private int friendshipsAmount;
