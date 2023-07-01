@@ -6,6 +6,5 @@ import pe.edu.cibertec.domain.entity.Chat;
 
 import java.util.List;
 
-@Repository
 public interface ChatRepository extends JpaRepository<Chat, Long> {
 }

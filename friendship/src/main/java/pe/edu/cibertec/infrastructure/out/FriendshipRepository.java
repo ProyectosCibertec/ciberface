@@ -8,13 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.cibertec.domain.entity.Friendship;
 
-@Repository
 public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO friendships(user_id_1, user_id_2, chat_id) VALUES (:userId, :unfriendId, :chatId)",
             nativeQuery = true)
-    Integer createFriendship(@Param("userId") long userId, @Param("unfriendId") long unfriendId, @Param("chatId") long chatId);
+    void createFriendship(@Param("userId") long userId, @Param("unfriendId") long unfriendId, @Param("chatId") long chatId);
 
     @Query("SELECT COUNT(friendship) FROM Friendship friendship WHERE friendship.userId.userId = :userId")
     Integer countByUserId(@Param("userId") long userId);
