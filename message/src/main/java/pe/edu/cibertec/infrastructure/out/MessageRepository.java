@@ -8,7 +8,6 @@ import pe.edu.cibertec.domain.entity.Message;
 
 import java.util.List;
 
-@Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query(value = "SELECT m FROM Message m WHERE m.chatId.chatId = :chatId")
     List<Message> findByChatId(@Param("chatId") Long chatId);

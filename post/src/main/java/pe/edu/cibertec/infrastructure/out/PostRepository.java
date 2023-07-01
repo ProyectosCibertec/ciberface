@@ -8,7 +8,6 @@ import pe.edu.cibertec.domain.entity.Post;
 
 import java.util.List;
 
-@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "SELECT p FROM Post p WHERE p.postContent LIKE %:pattern%")
     List<Post> getPostsByContent(@Param("pattern") String pattern);
